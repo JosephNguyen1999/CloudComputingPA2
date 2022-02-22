@@ -3,28 +3,30 @@
 <head>
     <style type="text/css">
         body {
-            background: black;
-            color: white;
+            background: white;
+            color: black;
         }
 
         div.container {
             max-width: 500px;
             margin: 100px auto;
-            border: 20px solid white;
+            border: 20px solid black;
             padding: 10px;
             text-align: center;
         }
 
-        h4 {
-            text-transform: uppercase;
-        }
+	input[type=file] {
+	    margin: 0 auto;
+	}
     </style>
 </head>
 
 <body>
-    <div class="container">
+  <div class="container">
+    <h1>Joseph Nguyen's PA2 Autograder!</h1>
+    <h3>Please Turn In The Assignment Below</h3>
         <form method='post'>
-            <input type="file" id="testFile" name="filename">
+            <input type="file" id="testFile" name="filename"><br><br>
             <input type="submit">
         </form>
     </div>

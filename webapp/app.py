@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 import subprocess
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 
 """
@@ -44,6 +44,27 @@ def index():
     return render_template("index.html")
 
 
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+    return render_template("result.html")
+
+
 @app.route("/", methods=['POST'])
 def submit():
     if request.method == 'POST':
@@ -63,9 +84,9 @@ def submit():
         print(fs.read())
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)
-    result = subprocess.check_output('python', 'compile.py')
+    # result = subprocess.check_output('python', 'compile.py')
 
-    return render_template("result.html", result)
+    return render_template("result.html")
 
 
 if __name__ == "__main__":

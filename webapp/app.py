@@ -67,7 +67,9 @@ def submit():
             print(fs.read())
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)
-    theResult = subprocess.check_output('python', 'compile.py')
+    # subprocess.check_output('python', 'compile.py')
+
+    theResult = "hello"
 
     return render_template("result.html", result = theResult)
 

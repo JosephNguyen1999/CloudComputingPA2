@@ -55,7 +55,7 @@ def submit():
         retcode = subprocess.call("/usr/bin/g++ ./uploads/walk.cc", shell=True)
         if retcode:
             thePrint = "failed to compile walk.cc"
-        exit    
+            exit    
 
         subprocess.call("rm -f ./output", shell=True)
         retcode = subprocess.call("./test.sh", shell=True)

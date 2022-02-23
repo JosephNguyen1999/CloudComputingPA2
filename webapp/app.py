@@ -56,17 +56,17 @@ def submit():
         subprocess.call("rm -f ./a.out", shell=True)
         retcode = subprocess.call("/usr/bin/g++ ./uploads/walk.cc", shell=True)
         if retcode:
-            result = "failed to compile walk.cc"
+            print("failed to compile walk.cc")
         exit    
 
         subprocess.call("rm -f ./output", shell=True)
         retcode = subprocess.call("./test.sh", shell=True)
 
-        result = "Score: " + str(retcode) + " out of 2 correct."
+        print("Score: " + str(retcode) + " out of 2 correct.")
 
-        result += "\n*************Original submission*************"
+        print("*************Original submission*************")
         with open('./uploads/walk.cc', 'r') as fs:
-            result += "\n(fs.read())"
+            print(fs.read())
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)
     # result = subprocess.check_output('python', 'compile.py')

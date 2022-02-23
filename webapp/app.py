@@ -47,15 +47,9 @@ def index():
 @app.route("/", methods=['POST'])
 def submit():
     if request.method == 'POST':
-        files = request.files.getlist("file[]")
-        print(request.files)
-        for file in files:
-            path = os.path.dirname(file.filename)
-            path2 = os.path.join(app.config['UPLOAD_FOLDER'], path)
-            if not os.path.exists(path2):
-                os.mkdir(path2)
-            filename = os.path.join(path, secure_filename(os.path.basename(file.filename)))
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        uploaded_file = request.files['file']
+        if uploaded_file.filename != '':
+            uploaded_file.save(uploaded_file.filename)
 
         subprocess.call("rm -f ./a.out", shell=True)
         retcode = subprocess.call("/usr/bin/g++ ./uploads/walk.cc", shell=True)

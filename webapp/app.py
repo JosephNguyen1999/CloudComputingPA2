@@ -44,44 +44,36 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
-    return render_template("result.html")
-
-
 @app.route("/", methods=['POST'])
+def upload():
+    if request.method =='POST':
+        files = request.files.getlist("file[]")
+        print(request.files)
+        for file in files:
+            path = os.path.dirname(file.filename)
+            path2 = os.path.join(app.config['UPLOAD_FOLDER'], path)
+            if not os.path.exists(path2):
+                os.mkdir(path2)
+            filename = os.path.join(path, secure_filename(os.path.basename(file.filename)))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return 'Files uploaded.'
+
 def submit():
     if request.method == 'POST':
         subprocess.call("rm -f ./a.out", shell=True)
-    retcode = subprocess.call("/usr/bin/g++ ./uploads/walk.cc", shell=True)
-    if retcode:
-        print("failed to compile walk.cc")
-    exit    
+        retcode = subprocess.call("/usr/bin/g++ ./uploads/walk.cc", shell=True)
+        if retcode:
+            print("failed to compile walk.cc")
+        exit    
 
-    subprocess.call("rm -f ./output", shell=True)
-    retcode = subprocess.call("./test.sh", shell=True)
+        subprocess.call("rm -f ./output", shell=True)
+        retcode = subprocess.call("./test.sh", shell=True)
 
-    print("Score: " + str(retcode) + " out of 2 correct.")
+        print("Score: " + str(retcode) + " out of 2 correct.")
 
-    print("*************Original submission*************")
-    with open('./uploads/walk.cc', 'r') as fs:
-        print(fs.read())
+        print("*************Original submission*************")
+        with open('./uploads/walk.cc', 'r') as fs:
+            print(fs.read())
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)
     # result = subprocess.check_output('python', 'compile.py')

@@ -64,12 +64,10 @@ def submit():
 
         print("*************Original submission*************")
         with open('./uploads/walk.cc', 'r') as fs:
-            print(fs.read())
+            theResult = fs.read()
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)
     # subprocess.check_output('python', 'compile.py')
-
-    theResult = "hello"
 
     return render_template("result.html", result = theResult)
 

@@ -32,7 +32,7 @@ def upload_file():
             print(fs.read())
 """
 
-UPLOAD_FOLDER = '/uploads'
+UPLOAD_FOLDER = '/'
 ALLOWED_EXTENSIONS = {'cc'}
 
 app = Flask(__name__)
@@ -59,7 +59,7 @@ def submit():
     print("Score: " + str(retcode) + " out of 2 correct.")
 
     print("*************Original submission*************")
-    with open('/uploads/walk.cc', 'r') as fs:
+    with open('/walk.cc', 'r') as fs:
         print(fs.read())
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)

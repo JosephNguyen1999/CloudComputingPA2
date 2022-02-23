@@ -1,14 +1,14 @@
 {
-    "AWSEBDockerrunVersion": "1",
-    "Image": {
-      "Name": "weremage/pa2",
-      "Update": "true"
-    },
-    "Ports": [
-      {
-        "ContainerPort": 5000,
-        "HostPort": 8000
-      }
-    ],
-    "Logging": "/var/log/nginx"
-  }
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "weremage/pa2",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 5000,
+      "HostPort": 8000
+    }
+  ],
+  "Logging": "/var/log/nginx"
+}

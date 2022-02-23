@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-      "Name": "weremage/walk",
+      "Name": "weremage/pa2",
       "Update": "true"
     },
     "Ports": [

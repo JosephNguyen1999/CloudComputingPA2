@@ -48,14 +48,14 @@ def index():
 def submit():
     if request.method == 'POST':
         f = request.files['file']
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-
+        f.save(os.path.join(
+            app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
 
         subprocess.call("rm -f ./a.out", shell=True)
         retcode = subprocess.call("/usr/bin/g++ ./uploads/walk.cc", shell=True)
         if retcode:
             thePrint = "failed to compile walk.cc"
-            exit    
+            exit
 
         subprocess.call("rm -f ./output", shell=True)
         retcode = subprocess.call("./test.sh", shell=True)
@@ -69,7 +69,7 @@ def submit():
     #     subprocess.call("compile.sh", shell=True)
     # subprocess.check_output('python', 'compile.py')
 
-    return render_template("result.html", print = thePrint)
+    return render_template("result.html", print=thePrint)
 
 
 if __name__ == "__main__":

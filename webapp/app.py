@@ -62,14 +62,14 @@ def submit():
 
         thePrint = "Score: " + str(retcode) + " out of 2 correct.\n"
 
-        thePrint += "*************Original submission*************"
+        thePrint += "*************Original submission*************\n"
         with open('./uploads/walk.cc', 'r') as fs:
-            theResult = fs.read()
+            thePrint += fs.read()
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)
     # subprocess.check_output('python', 'compile.py')
 
-    return render_template("result.html", result = theResult, print = thePrint)
+    return render_template("result.html", print = thePrint)
 
 
 if __name__ == "__main__":

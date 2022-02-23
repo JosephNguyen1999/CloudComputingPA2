@@ -42,23 +42,25 @@ def index():
 
 @app.route("/result")
 def submit():
+    # if request.method == 'POST':
+    #     subprocess.call("rm -f ./a.out", shell=True)
+    # retcode = subprocess.call("/usr/bin/g++ uploads/walk.cc", shell=True)
+    # if retcode:
+    #     print("failed to compile walk.cc")
+    # exit
+
+    # subprocess.call("rm -f ./output", shell=True)
+    # retcode = subprocess.call("./test.sh", shell=True)
+
+    # print("Score: " + str(retcode) + " out of 2 correct.")
+
+    # print("*************Original submission*************")
+    # with open('uploads/walk.cc', 'r') as fs:
+    #     print(fs.read())
     if request.method == 'POST':
-        subprocess.call("rm -f ./a.out", shell=True)
-    retcode = subprocess.call("/usr/bin/g++ uploads/walk.cc", shell=True)
-    if retcode:
-        print("failed to compile walk.cc")
-    exit
+        subprocess.call("compile.py", shell=True)
 
-    subprocess.call("rm -f ./output", shell=True)
-    retcode = subprocess.call("./test.sh", shell=True)
-
-    print("Score: " + str(retcode) + " out of 2 correct.")
-
-    print("*************Original submission*************")
-    with open('uploads/walk.cc', 'r') as fs:
-        print(fs.read())
-
-    return render_template("result.html", fs)
+    return render_template("result.html")
 
 
 if __name__ == "__main__":

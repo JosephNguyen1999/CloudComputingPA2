@@ -44,7 +44,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/", methods=['POST'])
+@app.route("/result", methods=['POST'])
 def submit():
     if request.method == 'POST':
         f = request.files['file']

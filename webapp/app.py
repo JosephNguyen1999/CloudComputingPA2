@@ -58,6 +58,7 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return 'Files uploaded.'
 
+@app.route("/", methods=['POST'])
 def submit():
     if request.method == 'POST':
         subprocess.call("rm -f ./a.out", shell=True)

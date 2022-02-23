@@ -32,7 +32,7 @@ def upload_file():
             print(fs.read())
 """
 
-UPLOAD_FOLDER = '/'
+UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'cc'}
 
 app = Flask(__name__)
@@ -51,7 +51,7 @@ def submit():
     retcode = subprocess.call("/usr/bin/g++ uploads/walk.cc", shell=True)
     if retcode:
         print("failed to compile walk.cc")
-    exit
+    exit    
 
     subprocess.call("rm -f ./output", shell=True)
     retcode = subprocess.call("./test.sh", shell=True)
@@ -59,7 +59,7 @@ def submit():
     print("Score: " + str(retcode) + " out of 2 correct.")
 
     print("*************Original submission*************")
-    with open('/walk.cc', 'r') as fs:
+    with open('uploads/walk.cc', 'r') as fs:
         print(fs.read())
     # if request.method == 'POST':
     #     subprocess.call("compile.sh", shell=True)

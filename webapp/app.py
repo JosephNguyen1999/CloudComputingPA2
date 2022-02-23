@@ -32,7 +32,11 @@ def upload_file():
             print(fs.read())
 """
 
+UPLOAD_FOLDER = '/uploads'
+ALLOWED_EXTENSIONS = {'cc'}
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route("/")
@@ -40,7 +44,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/result")
+@app.route("/", methods=['POST'])
 def submit():
     # if request.method == 'POST':
     #     subprocess.call("rm -f ./a.out", shell=True)

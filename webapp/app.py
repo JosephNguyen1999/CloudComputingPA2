@@ -32,7 +32,7 @@ def upload_file():
             print(fs.read())
 """
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = '/uploads'
 ALLOWED_EXTENSIONS = {'cc'}
 
 app = Flask(__name__)
